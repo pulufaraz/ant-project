@@ -1,0 +1,50 @@
+<project name="java-proj">
+
+<!--  Architect designs the flow of task
+	 clean task - to delete existing build/output files
+     init task - to initialize folder structure
+	 compile - to compile my source code source is .java files target is .class files
+	 jar - source is .class files & target is .jar
+	 copy- web content to output folder
+	 .zip - by adding both .jar and web content
+-->
+
+<property name="ver" value="1.0"/>
+
+<target name="clean">
+
+<delete dir="output"/>
+<delete dir="classes"/>
+<delete dir="dist"/>
+</target>
+
+<target name="init" depends="clean">
+<mkdir dir="output"/>
+<mkdir dir="classes"/>
+<mkdir dir="dist"/>
+
+</target>
+
+<target name="compile" depends="init">
+<javac srcdir="src"
+   destdir="classes"/>
+</target>
+
+<target name="jar" depends="compile">
+<jar destfile="output/hdfc${ver}.jar" basedir="classes"/>
+</target>
+
+<target name="copy" depends="jar">
+<copy todir="output">
+<fileset dir="src/web"/>
+</copy>
+</target>
+
+<target name="zip" depends="copy">
+<zip destfile="dist/hdfc${ver}.zip"
+     basedir="output"
+</target>
+
+
+
+</project>
