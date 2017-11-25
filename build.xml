@@ -42,7 +42,7 @@
 
 <target name="zip" depends="copy">
 <zip destfile="dist/hdfc${ver}.zip"
-     basedir="output"
+     basedir="output"/>
 </target>
 
 
